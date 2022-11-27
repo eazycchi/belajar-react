@@ -164,9 +164,9 @@ function ListUsers() {
 
       <h1>List Users</h1>
       <ul>
-        <li><Link to='belajar-react/user/Mochi'>Mochi</Link></li>
-        <li><Link to='belajar-react/user/Izza'>Izza</Link></li>
-        <li><Link to='belajar-react/user/Eazycchi'>Eazycchi</Link></li>
+        <li><Link to='user/Mochi'>Mochi</Link></li>
+        <li><Link to='user/Izza'>Izza</Link></li>
+        <li><Link to='user/Eazycchi'>Eazycchi</Link></li>
       </ul>
     </div>
   )
