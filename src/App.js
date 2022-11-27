@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-// import { Component } from 'react';
+import React from 'react';
 
 // //belajar STATE
-// class Timer extends Component {
+// class Timer extends React.Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = { start: parseInt(props.start) };
@@ -49,7 +49,7 @@ import './App.css';
 // }
 
 // // belajar event pakai class
-// class Toggle extends Component {
+// class Toggle extends React.Component {
 //   constructor(props) {
 //     super(props)
 //     this.state = {
@@ -74,7 +74,7 @@ import './App.css';
 
 
 // // belajar membuat form
-// class Form extends Component {
+// class Form extends React.Component {
 //   constructor(props) {
 //     super(props)
 //     this.state = {
