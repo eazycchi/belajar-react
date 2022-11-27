@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 
 class Clock extends Component {
   constructor(props) {
     super(props);
-    this.state = { date: props.date };
+    this.state = { time: parseInt(props.time) };
   }
 
   componentDidMount() {
@@ -21,15 +20,15 @@ class Clock extends Component {
 
   tick() {
     this.setState({
-      date: new Date()
+      time: parseInt(this.state.time) + 1
     });
   }
 
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h3>Timer</h3>
+        <h1>{this.state.time}</h1>
       </div>
     );
   }
@@ -39,8 +38,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Clock date={new Date()} />
+        <Clock time="0" />
       </header>
     </div>
   );
