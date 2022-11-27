@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 
 // //belajar STATE
 // class Timer extends React.Component {
@@ -125,20 +126,128 @@ import React from 'react';
 //   );
 // }
 
+// // belajar menggunakan API 
+// class API extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       items: [],
+//       isLoading: true
+//     }
+//   }
 
+//   componentDidMount() {
+//     fetch("https://jsonplaceholder.typicode.com/users")
+//       .then(response => response.json())
+//       .then(data => this.setState({
+//         items: data,
+//         isLoading: false
+//       }))
+//   }
 
-function App() {
+//   render() {
+//     const { items, isLoading } = this.state
+
+//     if (isLoading) {
+//       return (<span>Loading . . .</span>)
+//     }
+//     return (
+//       <div>
+//         <ul>
+//           {items.map((item, index) => <li key={index}>{item.name}</li>)}
+//         </ul>
+//       </div>
+//     )
+//   }
+// }
+
+// belajar Routes
+function Home() {
+  return <h1>Halaman Home</h1>
+}
+function ListUsers() {
   return (
-    <div className="App" >
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt='logo' />
-        {/* <Timer start="0" /> */}
-        {/* <Clicker /> */}
-        {/* <Toggle /> */}
-        {/* <Form /> */}
-      </header>
+    <div>
+
+      <h1>List Users</h1>
+      <ul>
+        <li><Link to='user/Mochi'>Mochi</Link></li>
+        <li><Link to='user/Izza'>Izza</Link></li>
+        <li><Link to='user/Eazycchi'>Eazycchi</Link></li>
+      </ul>
     </div>
-  );
+  )
+}
+function DetailUser({ match }) {
+  return <h1>Ini halaman detail {match.params.nama}</h1>
+}
+function NoMatch() {
+  return <h1>404</h1>
+}
+class Routes extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <nav>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/users'>User</Link></li>
+          </nav>
+
+          <main>
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/users' exact component={ListUsers} />
+              <Route path='/user/:nama' exact component={DetailUser} />
+              <Route component={NoMatch} />
+            </Switch>
+          </main>
+        </div>
+      </BrowserRouter>
+    )
+  }
+}
+
+// App memakai function
+// function App() {
+// return (
+//   <div className="App" >
+//     <header className="App-header">
+//       <img src={logo} className="App-logo" alt='logo' />
+//       {/* <Timer start="0" /> */}
+//       {/* <Clicker /> */}
+//       {/* <Toggle /> */}
+//       {/* <Form /> */}
+//       {/* <API /> */}
+//       <Routes />
+//     </header>
+//   </div>
+// );
+// }
+
+// ReactFragment digunakan untuk membungkus return tenpa memasukkan div
+
+// App memakai class
+class App extends Component {
+  render() {
+    return (
+      <div className="App" >
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt='logo' />
+          {/* <Timer start="0" /> */}
+          {/* <Clicker /> */}
+          {/* <Toggle /> */}
+          {/* <Form /> */}
+          {/* <API /> */}
+          <Routes />
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
