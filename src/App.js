@@ -4,162 +4,155 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 
 // //belajar STATE
-// class Timer extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { start: parseInt(props.start) };
-//   }
-
-//   //lifecycle
-//   componentDidMount() {
-//     this.interval = setInterval(
-//       () => this.increase(),
-//       1000
-//     );
-//   }
-
-//   componentWillUnmount() {
-//     clearInterval(this.interval);
-//   }
-
-//   increase() {
-//     // mengupdate state time setiap detik
-//     this.setState({
-//       start: parseInt(this.state.start) + 1
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>{this.state.start} Detik</h1>
-//       </div>
-//     );
-//   }
-// }
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { start: parseInt(props.start) };
+  }
+  //lifecycle
+  componentDidMount() {
+    this.interval = setInterval(
+      () => this.increase(),
+      1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  increase() {
+    // mengupdate state time setiap detik
+    this.setState({
+      start: parseInt(this.state.start) + 1
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.start} Detik</h1>
+      </div>
+    );
+  }
+}
 
 // // belajar event pakai function
-// function Clicker() {
-//   function handleClick(e) {
-//     alert('Berhasil klik Yeay!')
-//     e.preventDefault()
-//   }
-//   return (
-//     <a href='http://eazycchi.my.id' onClick={handleClick}>Klik disini</a>
-//   )
-// }
+function Clicker() {
+  function handleClick(e) {
+    alert('Berhasil klik Yeay!')
+    e.preventDefault()
+  }
+  return (
+    <a href='http://eazycchi.my.id' onClick={handleClick}>Klik disini</a>
+  )
+}
 
 // // belajar event pakai class
-// class Toggle extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       toggleStatus: true
-//     }
-//     this.handleClick = this.handleClick.bind(this)
-//   }
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      toggleStatus: true
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-//   handleClick() {
-//     this.setState(state => ({
-//       toggleStatus: !state.toggleStatus
-//     }))
-//   }
-//   render() {
-//     return (
-//       <button onClick={this.handleClick}>
-//         {this.state.toggleStatus ? 'ON' : 'OFF'}
-//       </button>
-//     )
-//   }
-// }
+  handleClick() {
+    this.setState(state => ({
+      toggleStatus: !state.toggleStatus
+    }))
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.toggleStatus ? 'ON' : 'OFF'}
+      </button>
+    )
+  }
+}
 
 
 // // belajar membuat form
-// class Form extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       todoItem: '',
-//       items: []
-//     }
-//   }
+class Form extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      todoItem: '',
+      items: []
+    }
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      // items: this.state.items.concat([this.state.todoItem])
+      // atau
+      items: [...this.state.items, this.state.todoItem],
+      todoItem: ''
+    })
+  }
+  handleChange = (e) => {
+    this.setState({
+      todoItem: e.target.value
+    })
+    console.log(this.state.todoItem)
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input value={this.state.todoItem} onChange={this.handleChange} />
+          <button>Tambah</button>
+        </form>
+        <List items={this.state.items} />
+      </div>
+    );
+  }
+}
 
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     this.setState({
-//       // items: this.state.items.concat([this.state.todoItem])
-//       // atau
-//       items: [...this.state.items, this.state.todoItem],
-//       todoItem: ''
-//     })
-//   }
-
-//   handleChange = (e) => {
-//     this.setState({
-//       todoItem: e.target.value
-//     })
-//     console.log(this.state.todoItem)
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <form onSubmit={this.handleSubmit}>
-//           <input value={this.state.todoItem} onChange={this.handleChange} />
-//           <button>Tambah</button>
-//         </form>
-//         <List items={this.state.items} />
-//       </div>
-//     );
-//   }
-// }
-
-// function List(props) {
-//   return (
-//     <ul>
-//       {
-//         props.items.map((item, index) =>
-//           <li key={index}>{item}</li>
-//         )
-//       }
-//     </ul>
-//   );
-// }
+function List(props) {
+  return (
+    <ul>
+      {
+        props.items.map((item, index) =>
+          <li key={index}>{item}</li>
+        )
+      }
+    </ul>
+  );
+}
 
 // // belajar menggunakan API 
-// class API extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       items: [],
-//       isLoading: true
-//     }
-//   }
+class API extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      items: [],
+      isLoading: true
+    }
+  }
 
-//   componentDidMount() {
-//     fetch("https://jsonplaceholder.typicode.com/users")
-//       .then(response => response.json())
-//       .then(data => this.setState({
-//         items: data,
-//         isLoading: false
-//       }))
-//   }
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(data => this.setState({
+        items: data,
+        isLoading: false
+      }))
+  }
 
-//   render() {
-//     const { items, isLoading } = this.state
+  render() {
+    const { items, isLoading } = this.state
 
-//     if (isLoading) {
-//       return (<span>Loading . . .</span>)
-//     }
-//     return (
-//       <div>
-//         <ul>
-//           {items.map((item, index) => <li key={index}>{item.name}</li>)}
-//         </ul>
-//       </div>
-//     )
-//   }
-// }
+    if (isLoading) {
+      return (<span>Loading . . .</span>)
+    }
+    return (
+      <div>
+        <ul>
+          {items.map((item, index) => <li key={index}>{item.name}</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
 
 // belajar Routes
 function Home() {
@@ -171,9 +164,9 @@ function ListUsers() {
 
       <h1>List Users</h1>
       <ul>
-        <li><Link to='user/Mochi'>Mochi</Link></li>
-        <li><Link to='user/Izza'>Izza</Link></li>
-        <li><Link to='user/Eazycchi'>Eazycchi</Link></li>
+        <li><Link to='belajar-react/user/Mochi'>Mochi</Link></li>
+        <li><Link to='belajar-react/user/Izza'>Izza</Link></li>
+        <li><Link to='belajar-react/user/Eazycchi'>Eazycchi</Link></li>
       </ul>
     </div>
   )
@@ -194,15 +187,15 @@ class Routes extends Component {
       <BrowserRouter>
         <div>
           <nav>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/users'>User</Link></li>
+            <li><Link to='/belajar-react/'>Home</Link></li>
+            <li><Link to='/belajar-react/users'>User</Link></li>
           </nav>
 
           <main>
             <Switch>
-              <Route path='/' exact component={Home} />
-              <Route path='/users' exact component={ListUsers} />
-              <Route path='/user/:nama' exact component={DetailUser} />
+              <Route path='/belajar-react/' exact component={Home} />
+              <Route path='/belajar-react/users' exact component={ListUsers} />
+              <Route path='/belajar-react/user/:nama' exact component={DetailUser} />
               <Route component={NoMatch} />
             </Switch>
           </main>
@@ -237,13 +230,13 @@ class App extends Component {
     return (
       <div className="App" >
         <header className="App-header">
-          <img src={logo} className="App-logo" alt='logo' />
-          {/* <Timer start="0" /> */}
-          {/* <Clicker /> */}
-          {/* <Toggle /> */}
-          {/* <Form /> */}
-          {/* <API /> */}
           <Routes />
+          <img src={logo} className="App-logo" alt='logo' />
+          <Timer start="0" />
+          <Clicker />
+          <Toggle />
+          <Form />
+          <API />
         </header>
       </div>
     );
